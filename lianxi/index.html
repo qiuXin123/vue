@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css" rel="stylesheet">
+        *{
+            margin:0;
+            padding:0;
+        }
+        #main{
+            width:500px;
+            margin:0 auto;
+            text-align:center;
+        }
+        nav{
+            display:inline-block;
+            margin:60px auto 45px;
+            background-color:#5597b4;
+            box-shadow:0 1px 1px #ccc;
+            border-radius:2px;
+        }
+        nav a{
+            display:inline-block;
+            padding: 18px 30px;
+            color:#fff !important;
+            font-weight:bold;
+            font-size:16px;
+            text-decoration:none !important;
+            line-height:1;
+            background-color:transparent;
+            -webkit-transition:background-color 0.25s;
+            -moz-transition:background-color 0.25s;
+            transition:background-color 0.25s;
+            cursor:pointer;
+        }
+        b{
+            display:inline-block;
+            padding:5px 10px;
+            background-color:#c4d7e0;
+            border-radius:2px;
+            font-size:18px;
+        }
+        .show{
+            background-color:#e35885;
+        }
+    </style>
+    <!--<script language="JavaScript" src="js/vue.js"></script>-->
+    <script language="JavaScript" src="js/vue.min.js"></script>
+    <!--<script language="JavaScript" src="https://unpkg.com/vue/dist/vue.js"> </script>-->
+</head>
+<body>
+<!--
+<script language="JavaScript">
+    new Vue({
+        el: '#app',
+        data: {
+            todos: [
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ]
+        }
+    });
+</script>-->
+<div id="app">
+    <ul id="example-2">
+        <li v-for="item in items">
+            {{ parentMessage }} - {{ $index }} - {{ item.message }}
+        </li>
+    </ul>
+</div>
+<div id="main">
+    <nav @click.prevent>
+        <a href="'#/newsDetail/'+item.href"  v-for="(item,index) in items" :class="{'show': item.active}" @click="makeActive(item, index)">{{item.name}}</a>
+    </nav>
+    <p>You chose <b>{{active}}</b></p>
+</div>
+    <script>
+        var example2 = new Vue({
+            el: '#example-2',
+            data: {
+                parentMessage: '菜鸟教程官网',
+                items: [
+                    { message: 'www.runoob.com' },
+                    { message: 'www.w3cschool.cc' }
+                ]
+            }
+        })
+    </script>
+<!--<div id="add">
+    <div v-if="Math.random() >0.5">
+        随机数大于0.5
+    </div>
+    <div v-else>
+        随机数小于0.5
+    </div>
+</div>-->
+
+<script>
+/*    new Vue({
+        el:'#add'
+    });*/
+
+</script>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#main',
+        data:{
+            active:'HTML',
+            items:[
+                {name:'HTML', active:true,href:"http://www.baidu.com"},
+                {name:'CSS', active:false,href:"http://www.taobao.com"},
+                {name:'JavaScript', active:false,href:"http://www.jd.com"},
+                {name:'Vue.js', active:false,href:"http://www.huaban.com"}
+            ]
+        },
+        methods: {
+            makeActive: function(item, index){
+                console.log(index);
+                this.active = item.name;
+                for(var i=0; i<this.items.length;i++){
+                    this.items[i].active = false;
+                }
+                this.items[index].active = true;
+            }
+        }
+    });
+</script>
+</html>
+
+
